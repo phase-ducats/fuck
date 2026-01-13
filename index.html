@@ -164,6 +164,18 @@
       background-color: #1d4ed8;
     }
 
+    .btn-share {
+      background-color: #7c3aed;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-share:hover {
+      background-color: #6d28d9;
+    }
+
     .col-span-2 {
       grid-column: span 2;
     }
@@ -179,7 +191,6 @@
     /* Mobile responsiveness */
     @media (max-width: 768px) {
       body {
-        padding: 12px;
         gap: 16px;
       }
 
@@ -193,7 +204,6 @@
 
       #main-text {
         font-size: 80px !important;
-        padding-bottom: 16px !important;
         transform: translateY(-20px) !important;
       }
 
@@ -267,8 +277,7 @@
     @media (max-width: 480px) {
       #main-text {
         font-size: 60px !important;
-        padding-bottom: 12px !important;
-        transform: translateY(-15px) !important;
+        padding-top: 20px !important;
       }
 
       .checkbox-grid {
@@ -366,11 +375,11 @@
   </div>
 
   <div class="button-container">
-    <button class="btn-download" onclick="downloadCard()">
-      Download as PNG
-    </button>
     <button class="btn-reset" onclick="resetCard()">
-      Reset
+      <span>🔄</span> Reset
+    </button>
+    <button class="btn-share" onclick="generateShareLink()">
+      <span>🔗</span> Share
     </button>
     <button class="btn-email" onclick="emailToBoss()">
       <span>📧</span> Email to Boss
@@ -378,25 +387,6 @@
   </div>
 
   <script>
-    function downloadCard() {
-      const card = document.getElementById('capture-card');
-
-      // Use html2canvas to take a screenshot of the card div
-      html2canvas(card, {
-        scale: 2, // Higher quality
-        backgroundColor: "#ffffff", // Ensure background isn't transparent
-        useCORS: true,
-        logging: false, // cleaner processing
-        letterRendering: true // helps with tracking-tighter alignment
-      }).then(canvas => {
-        // Create a link element to trigger the download
-        const link = document.createElement('a');
-        link.download = 'what-the-card.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      });
-    }
-
     function emailToBoss() {
       const messages = [
         "Abort. I’m not ready to be homeless yet. Stay in the cage.",
@@ -433,6 +423,64 @@
         textInput.value = '';
       }
     }
+
+    function generateShareLink() {
+      const checkboxes = document.querySelectorAll('#capture-card input[type="checkbox"]');
+      const textInput = document.querySelector('#capture-card input[type="text"]');
+
+      // Encode checkbox status as binary
+      const binaryState = Array.from(checkboxes).map(cb => cb.checked ? '1' : '0').join('');
+
+      // Encode custom text as base64
+      const customText = textInput ? textInput.value : '';
+      const encodedText = customText ? btoa(encodeURIComponent(customText)) : '';
+
+      // Build state string
+      const hexString = BigInt('0b' + binaryState).toString(16);
+      const stateString = hexString + (encodedText ? '|' + encodedText : '');
+      const shareUrl = window.location.origin + window.location.pathname + '#' + stateString;
+
+      // Copy to clipboard
+      navigator.clipboard.writeText(shareUrl).then(() => {
+        alert('Link copied to clipboard!');
+      }).catch(() => {
+        // Fallback if clipboard fails
+        prompt('Share this link:', shareUrl);
+      });
+    }
+
+    function loadFromUrl() {
+      const hash = window.location.hash.substring(1);
+
+      if (!hash) return;
+
+      // Split by pipe
+      const parts = hash.split('|');
+      const hexString = BigInt('0x' + parts[0]).toString(2);
+      const encodedText = parts[1] || '';
+
+      // Decode custom text from base64
+      const customText = encodedText ? decodeURIComponent(atob(encodedText)) : '';
+
+      // Apply checkbox states
+
+      const binaryState = hexString.padStart(12, '0');
+      const checkboxes = document.querySelectorAll('#capture-card input[type="checkbox"]');
+      checkboxes.forEach((cb, index) => {
+        if (index < binaryState.length) {
+          cb.checked = binaryState[index] === '1';
+        }
+      });
+
+      // Apply custom text
+      const textInput = document.querySelector('#capture-card input[type="text"]');
+      if (textInput) {
+        textInput.value = customText;
+      }
+    }
+
+    // Load state from URL on page load
+    window.addEventListener('DOMContentLoaded', loadFromUrl);
   </script>
 
 </body>
