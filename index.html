@@ -175,6 +175,118 @@
     .font-semibold {
       font-weight: 600;
     }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      body {
+        padding: 12px;
+        gap: 16px;
+      }
+
+      #capture-card {
+        padding: 20px;
+      }
+
+      .header-text {
+        font-size: 18px;
+      }
+
+      #main-text {
+        font-size: 80px !important;
+        padding-bottom: 16px !important;
+        transform: translateY(-20px) !important;
+      }
+
+      .checkbox-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 8px;
+        font-size: 16px;
+      }
+
+      .checkbox-label {
+        width: calc(50% - 4px);
+      }
+
+      .checkbox-input-6 {
+        width: 20px;
+        height: 20px;
+      }
+
+      .checkbox-input-4 {
+        width: 16px;
+        height: 16px;
+      }
+
+      input[type="text"] {
+        font-size: 16px;
+        padding-bottom: 2px;
+      }
+
+      .button-container {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .col-span-2 {
+        width: calc(50% - 4px);
+      }
+
+      .text-lg {
+        font-size: 14px;
+      }
+
+      /* Reorder items on mobile */
+      .checkbox-label:nth-child(7) {
+        order: 7;
+      }
+
+      .checkbox-label:nth-child(8) {
+        order: 9;
+      }
+
+      .checkbox-label:nth-child(9) {
+        order: 11;
+      }
+
+      .checkbox-label:nth-child(10) {
+        order: 8;
+      }
+
+      .checkbox-label:nth-child(11) {
+        order: 10;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #main-text {
+        font-size: 60px !important;
+        padding-bottom: 12px !important;
+        transform: translateY(-15px) !important;
+      }
+
+      .checkbox-grid {
+        gap: 10px 6px;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 8px 16px;
+        font-size: 12px;
+        width: 100%;
+      }
+
+      .button-container {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
   </style>
 </head>
 
