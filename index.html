@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+      gap: 24px;
+      margin: 0;
+    }
+
+    #capture-card {
+      background-color: #f0f9ff;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+      padding: 32px;
+      width: 100%;
+      max-width: 56rem;
+      border: 1px solid #d1d5db;
+    }
+
+    .header-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 0px;
+    }
+
+    .header-text {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: lowercase;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #000;
+      border-radius: 4px;
+      cursor: pointer;
+      accent-color: #000;
+      background-color: white;
+      flex-shrink: 0;
+    }
+
+    input[type="checkbox"]:checked {
+      background-color: #000;
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+      background-size: 100% 100%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px 8px;
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: lowercase;
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .checkbox-label:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .checkbox-input-6 {
+      width: 24px;
+      height: 24px;
+    }
+
+    input[type="text"] {
+      background-color: transparent;
+      border: none;
+      border-bottom: 2px solid #000;
+      width: 100%;
+      padding-bottom: 4px;
+      font-size: 22px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-bottom-color: #000;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 16px;
+    }
+
+    button {
+      font-family: 'Inter', sans-serif;
+      padding: 12px 32px;
+      border-radius: 9999px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      transform-origin: center;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    .btn-download {
+      background-color: #000;
+      color: white;
+    }
+
+    .btn-download:hover {
+      background-color: #1f2937;
+    }
+
+    .btn-reset {
+      background-color: #4b5563;
+      color: white;
+    }
+
+    .btn-reset:hover {
+      background-color: #374151;
+    }
+
+    .btn-email {
+      background-color: #2563eb;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-email:hover {
+      background-color: #1d4ed8;
+    }
+
+    .col-span-2 {
+      grid-column: span 2;
+    }
+
+    .text-lg {
+      font-size: 18px;
+    }
+
+    .font-semibold {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="capture-card">
+
+    <div class="header-row">
+      <input type="checkbox" class="checkbox-input-6">
+      <span class="header-text">what the</span>
+    </div>
+
+    <h1 id="main-text"
+      style="font-size: 180px; font-weight: 900; line-height: 1; letter-spacing: 0.05em; user-select: none; text-align: center; display: flex; align-items: center; justify-content: center; margin: 0;">
+      FUCK
+    </h1>
+
+    <div class="checkbox-grid">
+      <!-- Column 1: me, yes, off, and die -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> me
+      </label>
+
+      <!-- Column 2: that, it, you, and the horse -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> that
+      </label>
+
+      <!-- Column 3: this, the man, input text -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> this
+      </label>
+
+      <!-- Column 1 -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> yes
+      </label>
+
+      <!-- Column 2 -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> it
+      </label>
+
+      <!-- Column 3 -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> the man
+      </label>
+
+      <!-- Column 1 -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> off
+      </label>
+
+      <!-- Column 2 -->
+      <label class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6"> you
+      </label>
+
+      <!-- Column 3 -->
+      <div class="checkbox-label">
+        <input type="checkbox" class="checkbox-input-6">
+        <input type="text" placeholder="">
+      </div>
+
+      <!-- Column 1 -->
+      <label class="checkbox-label text-lg font-semibold">
+        <input type="checkbox" class="checkbox-input-6"> and die
+      </label>
+
+      <!-- Column 2 -->
+      <label class="checkbox-label text-lg font-semibold col-span-2">
+        <input type="checkbox" class="checkbox-input-6" /> and the horse you rode in on
+      </label>
+
+      <!-- Column 3: empty -->
+    </div>
+  </div>
+
+  <div class="button-container">
+    <button class="btn-download" onclick="downloadCard()">
+      Download as PNG
+    </button>
+    <button class="btn-reset" onclick="resetCard()">
+      Reset
+    </button>
+    <button class="btn-email" onclick="emailToBoss()">
+      <span>📧</span> Email to Boss
+    </button>
+  </div>
+
+  <script>
+    function downloadCard() {
+      const card = document.getElementById('capture-card');
+
+      // Use html2canvas to take a screenshot of the card div
+      html2canvas(card, {
+        scale: 2, // Higher quality
+        backgroundColor: "#ffffff", // Ensure background isn't transparent
+        useCORS: true,
+        logging: false, // cleaner processing
+        letterRendering: true // helps with tracking-tighter alignment
+      }).then(canvas => {
+        // Create a link element to trigger the download
+        const link = document.createElement('a');
+        link.download = 'what-the-card.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+
+    function emailToBoss() {
+      const messages = [
+        "Abort. I’m not ready to be homeless yet. Stay in the cage.",
+        "Actually, I’m a broke little bitch. I’ll keep my mouth shut and take the bread.",
+        "Fuck that. Let's keep sucking the corporate dick until the mortgage is paid.",
+        "Eat shit and stay quiet. Back to the goddamn salt mines.",
+        "Don't do it. My dignity isn't worth as much as my rent. Back to being a corporate slut.",
+        "Clicking 'Send' is a fast track to sucking off a stranger for a sandwich. Sit down.",
+        "My bank account says I don't have enough 'Fuck You' money to actually say 'Fuck You.'",
+        "Nah, fuck it. I'm not rich enough to have this much integrity yet.",
+        "Shut your mouth and take the lashing. You’ve got bills to pay, motherfucker.",
+        "Shut your mouth and keep typing. Your boss is a cunt, but your landlord is a bigger one."
+      ];
+
+      const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+      alert(randomMessage);
+    }
+
+    function resetCard() {
+      // Ask for confirmation
+      if (!confirm('Are you sure you want to reset all fields?')) {
+        return;
+      }
+
+      // Reset all checkboxes
+      const checkboxes = document.querySelectorAll('#capture-card input[type="checkbox"]');
+      checkboxes.forEach((cb) => {
+        cb.checked = false;
+      });
+
+      // Reset text input
+      const textInput = document.querySelector('#capture-card input[type="text"]');
+      if (textInput) {
+        textInput.value = '';
+      }
+    }
+  </script>
+
+</body>
+
+</html>
