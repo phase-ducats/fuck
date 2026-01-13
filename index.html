@@ -440,13 +440,36 @@
       const stateString = hexString + (encodedText ? '|' + encodedText : '');
       const shareUrl = window.location.origin + window.location.pathname + '#' + stateString;
 
-      // Copy to clipboard
-      navigator.clipboard.writeText(shareUrl).then(() => {
+      // Try clipboard API first
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          alert('Link copied to clipboard!');
+        }).catch(() => {
+          showShareDialog(shareUrl);
+        });
+      } else {
+        // Fallback for browsers without clipboard API
+        showShareDialog(shareUrl);
+      }
+    }
+
+    function showShareDialog(url) {
+      // Create a temporary textarea to select and copy
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        document.execCommand('copy');
         alert('Link copied to clipboard!');
-      }).catch(() => {
-        // Fallback if clipboard fails
-        prompt('Share this link:', shareUrl);
-      });
+      } catch (err) {
+        prompt('Share this link:', url);
+      }
+
+      document.body.removeChild(textarea);
     }
 
     function loadFromUrl() {
