@@ -1,6 +1,6 @@
 # What The Fuck - Status Generator
 
-A fun, interactive web application that lets you generate a shareable status card with customizable checkboxes and free-form text. Perfect for expressing frustration in style.
+A hilariously fun, wildly interactive web application that lets you generate shareable status cards with customizable checkboxes and free-form text. Perfect for expressing emotions in style.
 
 ## Features
 
@@ -8,6 +8,7 @@ A fun, interactive web application that lets you generate a shareable status car
 - **Share Links**: Generate compact shareable URLs with encoded state that can be shared with colleagues
 - **Mobile Responsive**: Works seamlessly on phones, tablets, and desktops
 - **Responsive Grid**: On mobile, the layout intelligently reflows to maintain proper grouping
+- **Dark Mode**: Toggle between light and dark themes
 
 ## Functionality
 
@@ -16,8 +17,11 @@ A fun, interactive web application that lets you generate a shareable status car
 - **Email to Boss**: Shows a comprehensive reality check message
 - **Share**: Generates a compact shareable link and copies it to clipboard
 
-### Share Links
-Share compact encoded URLs with colleagues and friends
+## Contributing
+
+We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+
+We also ask that you review our [Code of Conduct](CODE_OF_CONDUCT.md) before participating.
 
 ## Setup & Running
 
