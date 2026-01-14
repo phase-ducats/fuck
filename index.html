@@ -8,13 +8,34 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
 
+    :root {
+      --bg-primary: white;
+      --bg-secondary: #f0f9ff;
+      --bg-tertiary: #f3f4f6;
+      --text-primary: #000;
+      --text-secondary: #6b7280;
+      --border-color: #d1d5db;
+      --hover-bg: rgba(0, 0, 0, 0.05);
+    }
+
+    html.dark-mode {
+      --bg-primary: #2a2a2a;
+      --bg-secondary: #0f0f0f;
+      --bg-tertiary: #3d3d3d;
+      --text-primary: #f0f0f0;
+      --text-secondary: #9ca3af;
+      --border-color: #4b5563;
+      --hover-bg: rgba(255, 255, 255, 0.05);
+    }
+
     * {
       box-sizing: border-box;
     }
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: white;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -23,17 +44,19 @@
       padding: 16px;
       gap: 24px;
       margin: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     #capture-card {
-      background-color: #f0f9ff;
+      background-color: var(--bg-secondary);
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       padding: 32px;
       width: 100%;
       max-width: 56rem;
-      border: 1px solid #d1d5db;
+      border: 1px solid var(--border-color);
       position: relative;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     .info-icon {
@@ -43,14 +66,14 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      border: 2px solid #6b7280;
+      border: 2px solid var(--text-secondary);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
-      color: #6b7280;
+      color: var(--text-secondary);
       opacity: 0;
       transition: all 0.2s ease;
     }
@@ -60,9 +83,65 @@
     }
 
     .info-icon:hover {
-      border-color: #000;
-      color: #000;
-      background-color: #f3f4f6;
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    .dark-mode-toggle {
+      position: absolute;
+      top: 16px;
+      right: 48px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--text-secondary);
+      background-color: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      opacity: 0;
+      padding: 0;
+    }
+
+    #capture-card:hover .dark-mode-toggle {
+      opacity: 1;
+    }
+
+    .dark-mode-toggle:hover {
+      border-color: var(--text-primary);
+      color: var(--text-primary);
+      background-color: var(--bg-tertiary);
+    }
+
+    /* Moon icon (light mode is active) */
+    html:not(.dark-mode) .dark-mode-toggle {
+      background-color: #888888;
+      color: white;
+      border-color: #888888;
+    }
+
+    html:not(.dark-mode) .dark-mode-toggle:hover {
+      background-color: #999999;
+      border-color: #999999;
+      color: white;
+    }
+
+    /* Sun icon (dark mode is active) */
+    html.dark-mode .dark-mode-toggle {
+      background-color: #808080;
+      color: #1a1a1a;
+      border-color: #808080;
+    }
+
+    html.dark-mode .dark-mode-toggle:hover {
+      background-color: #707070;
+      border-color: #707070;
+      color: #1a1a1a;
     }
 
     .header-row {
@@ -76,6 +155,7 @@
       font-size: 24px;
       font-weight: 700;
       text-transform: lowercase;
+      color: var(--text-primary);
     }
 
     input[type="checkbox"] {
@@ -83,17 +163,26 @@
       -webkit-appearance: none;
       width: 24px;
       height: 24px;
-      border: 3px solid #000;
+      border: 3px solid var(--text-primary);
       border-radius: 4px;
       cursor: pointer;
-      accent-color: #000;
-      background-color: white;
+      accent-color: var(--text-primary);
+      background-color: var(--bg-primary);
       flex-shrink: 0;
+      transition: all 0.2s ease;
     }
 
     input[type="checkbox"]:checked {
       background-color: #000;
       background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+      background-size: 100% 100%;
+      background-position: 50%;
+      background-repeat: no-repeat;
+    }
+
+    html.dark-mode input[type="checkbox"]:checked {
+      background-color: white;
+      background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='black' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
       background-size: 100% 100%;
       background-position: 50%;
       background-repeat: no-repeat;
@@ -119,7 +208,7 @@
     }
 
     .checkbox-label:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--hover-bg);
     }
 
     .checkbox-input-6 {
@@ -130,18 +219,24 @@
     input[type="text"] {
       background-color: transparent;
       border: none;
-      border-bottom: 2px solid #000;
+      border-bottom: 2px solid var(--text-primary);
+      color: var(--text-primary);
       width: 100%;
       padding-bottom: 4px;
       font-size: 22px;
       font-weight: 700;
       font-family: 'Inter', sans-serif;
       outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    input[type="text"]::placeholder {
+      color: var(--text-secondary);
     }
 
     input[type="text"]:focus {
       outline: none;
-      border-bottom-color: #000;
+      border-bottom-color: var(--text-primary);
     }
 
     .button-container {
@@ -165,12 +260,12 @@
     }
 
     .btn-download {
-      background-color: #000;
-      color: white;
+      background-color: var(--text-primary);
+      color: var(--bg-primary);
     }
 
     .btn-download:hover {
-      background-color: #1f2937;
+      background-color: var(--text-secondary);
     }
 
     .btn-reset {
@@ -333,7 +428,11 @@
 
   <div id="capture-card">
 
-    <a class="info-icon" href="https://github.com/phase-ducats/fuck" target="_blank" rel="noopener noreferrer" title="View on GitHub">
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle dark mode"
+      id="dark-mode-toggle">🌙</button>
+
+    <a class="info-icon" href="https://github.com/phase-ducats/fuck" target="_blank" rel="noopener noreferrer"
+      title="View on GitHub">
       ℹ
     </a>
 
@@ -421,6 +520,29 @@
   </div>
 
   <script>
+    // Dark mode functionality
+    function toggleDarkMode() {
+      const html = document.documentElement;
+      const isDarkMode = html.classList.toggle('dark-mode');
+      const toggle = document.getElementById('dark-mode-toggle');
+      toggle.textContent = isDarkMode ? '☀️' : '🌙';
+      localStorage.setItem('darkMode', isDarkMode ? 'true' : 'false');
+    }
+
+    function initDarkMode() {
+      const savedDarkMode = localStorage.getItem('darkMode');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDarkMode = savedDarkMode !== null ? savedDarkMode === 'true' : prefersDark;
+
+      if (isDarkMode) {
+        document.documentElement.classList.add('dark-mode');
+        document.getElementById('dark-mode-toggle').textContent = '☀️';
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+        document.getElementById('dark-mode-toggle').textContent = '🌙';
+      }
+    }
+
     function emailToBoss() {
       const messages = [
         "Abort. I’m not ready to be homeless yet. Stay in the cage.",
@@ -538,6 +660,7 @@
 
     // Load state from URL on page load
     window.addEventListener('DOMContentLoaded', loadFromUrl);
+    window.addEventListener('DOMContentLoaded', initDarkMode);
   </script>
 
 </body>
